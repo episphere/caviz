@@ -7,7 +7,7 @@ console.log('caviz.js loaded');
 
     caviz.seerData={}
 
-    caviz.seerLogin = async function(k){ // k is api key
+    caviz.seerStart = async function(k){ // k is api key
         let that=this
         k = k||(function(){
             if(typeof(localStorage)=="object"){ // update from localStorage if available
@@ -27,6 +27,12 @@ console.log('caviz.js loaded');
                 'X-SEERAPI-Key':k
             }
         })).json()
+    }
+
+    caviz.seerLogin=async function(k){
+        let dd = await caviz.seerStart(k)
+        caviz.seerData.schemas=dd
+        return dd
     }
 
     caviz.seerUrl='https://api.seer.cancer.gov/rest'
