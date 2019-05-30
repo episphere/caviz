@@ -52,12 +52,17 @@ console.log('caviz.js loaded');
     }
 
     caviz.seerDiseaseAll=async function(){
-        let dd = await this.seerDisease('count=1')
-        for(let i = 1 ; i<dd.total ; i=i+100){
-            let di = await this.seerDisease(`count=100&offset=${i}`)
-            dd.results=dd.results.concat(di.results)
-            console.log(`${dd.results.length}/${dd.total}`)
-        }
+        if(this.seerData.diseases){ // trying cache first
+            var dd = this.seerData.diseases
+        }else{
+            var dd = await this.seerDisease('count=1')
+            for(let i = 1 ; i<dd.total ; i=i+100){
+                let di = await this.seerDisease(`count=100&offset=${i}`)
+                dd.results=dd.results.concat(di.results)
+                console.log(`${dd.results.length}/${dd.total}`)
+            }
+            this.seerData.diseases=dd // caching
+        }        
         return dd
     }
 
