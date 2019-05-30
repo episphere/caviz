@@ -5,7 +5,7 @@ console.log('caviz.js loaded');
         created_at:Date()
     }
 
-    caviz.seerStatus = async function(k){ // k is api key
+    caviz.seerLogin = async function(k){ // k is api key
         k = k||(function(){
             if(typeof(localStorage)=="object"){ // update from localStorage if available
                 if(localStorage.seerKey){
@@ -15,12 +15,16 @@ console.log('caviz.js loaded');
             return caviz.seerKey
         })()
         //return (await fetch('https://api.seer.cancer.gov/rest/staging/cs/02.05.50/schemas?api_key='+k)).json()
-        return (await fetch('https://api.seer.cancer.gov/rest/staging/cs/02.05.50/schemas',{
+        return (await fetch(`${caviz.seerUrl}/staging/cs/02.05.50/schemas`,{
             headers:{
                 'X-SEERAPI-Key':k
             }
         })).json()
     }
+
+    caviz.seerUrl='https://api.seer.cancer.gov/rest'
+
+    
 
 
     if(typeof(define)!='undefined'){
