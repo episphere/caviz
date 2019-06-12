@@ -19,10 +19,11 @@ console.log('caviz.js loaded');
             }else{
                 error('SEER API key not provided and local storage not found')
             }
-            localStorage.seerKey=k
             return that.seerKey
         })()
         //return (await fetch('https://api.seer.cancer.gov/rest/staging/cs/02.05.50/schemas?api_key='+k)).json()
+        localStorage.seerKey=k
+        caviz.seerKey=k
         return (await fetch(`${this.seerUrl}/staging/cs/02.05.50/schemas`,{
             headers:{
                 'X-SEERAPI-Key':k
