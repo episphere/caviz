@@ -2,6 +2,7 @@ console.log('caviz.js loaded');
 
 (function(){ // caviz in the scope of an anonymous function so it wont contaminate root if required
     let caviz={
+    //caviz={
         created_at:Date()
     }
 
